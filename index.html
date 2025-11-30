@@ -1,0 +1,245 @@
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Heart, Flower, Crown, Send, Calendar, Users, Music } from 'lucide-react';
+
+const App = () => {
+  // Estado para controlar a reprodução de música (opcional, mas adiciona toque especial)
+  // Neste demo, é apenas visual, mas preparado para lógica real.
+
+  // Variantes de animação para reuso
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const scaleIn = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: { scale: 1, opacity: 1, transition: { duration: 0.8, delay: 0.2 } }
+  };
+
+  return (
+    <div className="min-h-screen bg-stone-50 text-stone-800 font-sans overflow-x-hidden selection:bg-rose-200">
+      {/* Importação de Fontes via Style Tag */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        
+        .font-script { font-family: 'Great Vibes', cursive; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Lato', sans-serif; }
+        
+        .bg-pattern {
+          background-color: #fcfaf8;
+          background-image: radial-gradient(#e7e5e4 1px, transparent 1px);
+          background-size: 20px 20px;
+        }
+        
+        .text-gold {
+          color: #C5A059;
+          background: linear-gradient(45deg, #C5A059, #E6C888, #C5A059);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent; 
+          background-clip: text;
+        }
+      `}</style>
+
+      {/* --- HERO SECTION --- */}
+      <section className="relative h-screen flex flex-col items-center justify-center text-center px-6 bg-pattern">
+        {/* Elementos Decorativos de Fundo (Abstratos) */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent z-10"></div>
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-rose-100 rounded-full blur-3xl opacity-30"></div>
+        <div className="absolute top-40 right-0 w-72 h-72 bg-amber-100 rounded-full blur-3xl opacity-30"></div>
+
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={scaleIn}
+          className="z-20 relative border-2 border-stone-200/60 p-8 md:p-12 rounded-tl-[80px] rounded-br-[80px] bg-white/40 backdrop-blur-sm shadow-xl max-w-lg w-full"
+        >
+          <div className="flex justify-center mb-6 text-[#C5A059]">
+            <Crown size={32} strokeWidth={1} />
+          </div>
+          
+          <h2 className="font-body text-sm uppercase tracking-[0.3em] text-stone-500 mb-4">Convite Especial</h2>
+          
+          <h1 className="font-script text-6xl md:text-7xl mb-2 text-stone-800">
+            Ronaldo
+            <span className="block text-4xl my-2 font-serif italic text-[#C5A059]">&</span>
+            Vitória
+          </h1>
+          
+          <div className="mt-8 flex justify-center text-rose-300">
+            <Flower size={24} />
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 animate-bounce text-stone-400"
+        >
+          <span className="text-xs uppercase tracking-widest">Deslize para ler</span>
+        </motion.div>
+      </section>
+
+      {/* --- CARTA DE ABERTURA --- */}
+      <section className="py-20 px-6 bg-white relative">
+        <div className="max-w-2xl mx-auto">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center"
+          >
+            <div className="flex justify-center mb-6 text-rose-300">
+              <Heart size={28} fill="#fda4af" fillOpacity={0.2} strokeWidth={1.5} />
+            </div>
+
+            <h3 className="font-serif text-2xl md:text-3xl text-stone-800 mb-8 italic">
+              "A vida é feita de momentos, mas a história é escrita por quem caminha ao nosso lado."
+            </h3>
+
+            <div className="font-body text-stone-600 leading-loose text-lg space-y-6 text-justify md:text-center">
+              <p>
+                Ao olharmos para trás, vemos que cada passo importante que demos teve o apoio, o carinho e a oração de pessoas especiais. Pessoas que não apenas assistiram à nossa jornada, mas que ajudaram a construí-la.
+              </p>
+              <p>
+                O amor que nos une hoje é fruto de muitas bênçãos, e a amizade de vocês é uma das maiores delas. Vocês nos inspiram, nos aconselham e nos alegram. Não conseguiríamos imaginar o início da nossa nova família sem ter vocês por perto, abençoando nossa união.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* --- O PEDIDO --- */}
+      <section className="py-24 px-4 bg-stone-900 text-stone-100 relative overflow-hidden">
+        {/* Imagem de Fundo (Placeholder escuro e elegante) */}
+        <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center bg-fixed"></div>
+        <div className="absolute inset-0 bg-stone-900/40"></div>
+        
+        <div className="relative z-10 max-w-3xl mx-auto text-center border border-white/20 p-8 md:p-16 bg-stone-800/30 backdrop-blur-md rounded-lg shadow-2xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={scaleIn}
+          >
+            <div className="flex justify-center mb-6 text-[#C5A059]">
+              {/* Ícone de Alianças Representativo */}
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full border-2 border-[#C5A059] absolute -left-4"></div>
+                <div className="w-12 h-12 rounded-full border-2 border-white absolute left-2 top-0"></div>
+              </div>
+            </div>
+            
+            <h2 className="font-serif text-3xl md:text-5xl leading-tight mb-8 mt-16 font-medium">
+              Vocês são nossa história e nosso futuro.
+            </h2>
+            
+            <div className="w-24 h-[1px] bg-[#C5A059] mx-auto mb-8"></div>
+
+            <p className="font-script text-4xl md:text-5xl text-[#C5A059] mb-4">
+              Aceitam ser nossos
+            </p>
+            <p className="font-serif text-xl uppercase tracking-[0.2em] mb-8">
+              Padrinhos de Casamento?
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* --- INFORMAÇÕES E PAIS --- */}
+      <section className="py-20 px-6 bg-[#faf9f6]">
+        <div className="max-w-4xl mx-auto">
+          
+          {/* Bloco dos Pais */}
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="grid md:grid-cols-2 gap-12 mb-20 text-center"
+          >
+            <div>
+              <h4 className="font-serif text-xl text-[#C5A059] mb-4 italic">Com a benção dos pais do Noivo</h4>
+              <p className="font-body text-stone-700 text-lg">Natividade Pereira de Araújo</p>
+              <p className="font-body text-stone-700 text-lg">&</p>
+              <p className="font-body text-stone-700 text-lg">Maria Barros de Araújo</p>
+            </div>
+            <div>
+              <h4 className="font-serif text-xl text-[#C5A059] mb-4 italic">Com a benção dos pais da Noiva</h4>
+              <p className="font-body text-stone-700 text-lg">Reilson Barbosa Santos</p>
+              <p className="font-body text-stone-700 text-lg">&</p>
+              <p className="font-body text-stone-700 text-lg">Vânia Nunes de Araújo Pereira</p>
+            </div>
+          </motion.div>
+
+          {/* Expectativa / Detalhes */}
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="bg-white p-8 md:p-12 shadow-sm border-t-4 border-[#C5A059] text-center rounded-lg"
+          >
+            <div className="flex justify-center text-rose-400 mb-4">
+              <Calendar size={32} strokeWidth={1} />
+            </div>
+            <h3 className="font-serif text-2xl text-stone-800 mb-4">Dezembro</h3>
+            <p className="font-body text-stone-600 mb-6 max-w-lg mx-auto leading-relaxed">
+              A celebração da nossa união acontecerá neste mês de dezembro. Estamos finalizando os últimos detalhes com muito carinho.
+            </p>
+            <div className="bg-stone-50 p-4 rounded-lg inline-block">
+              <p className="font-body text-sm text-stone-500 italic">
+                Assim que a data exata, horário e Igreja forem confirmados, enviaremos o <strong>Manual do Padrinho</strong> com todas as informações.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* --- RSVP / CTA --- */}
+      <section className="py-20 px-6 bg-stone-100 text-center">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={scaleIn}
+          className="max-w-md mx-auto"
+        >
+          <h2 className="font-serif text-3xl text-stone-800 mb-8">Sua presença é essencial</h2>
+          <p className="font-body text-stone-600 mb-10">
+            Ficaríamos imensamente honrados em tê-los ao nosso lado no altar.
+          </p>
+
+          <a 
+            href="https://wa.me/?text=Eu%20aceito!%20Que%20honra%20fazer%20parte%20da%20hist%C3%B3ria%20de%20voc%C3%AAs!" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#C5A059] text-white font-serif text-lg tracking-wide rounded-full shadow-lg overflow-hidden transition-transform hover:scale-105 active:scale-95"
+          >
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
+            <Send size={20} />
+            Confirmar Aceite
+          </a>
+          
+          <p className="mt-6 text-xs text-stone-400 font-body">
+            Ao clicar, você poderá escolher enviar a resposta para o Ronaldo ou para a Vitória.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* --- FOOTER --- */}
+      <footer className="py-8 bg-stone-900 text-stone-500 text-center font-body text-xs">
+        <p>Com amor, Ronaldo & Vitória</p>
+        <div className="flex justify-center gap-2 mt-2">
+          <span>&copy; {new Date().getFullYear()}</span>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
